@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+    <meta charset="UTF-8">
+    <title>DIA MFA</title>
+    
+	<!-- Bootstrap CSS CDN -->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">-->
+	   
+	<!-- jQuery CDN - Slim version (=without AJAX) -->
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    
+    <!-- Bootstrap JS -->
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>-->   
+	
+	<!-- Font Awesome JS -->
+    <!--<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>-->
+	
+	<!--<link rel="stylesheet" type="text/css" media="all" href="css/app2.css"/>-->
+	 
+	<!--Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/jquery-ui.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/appointment-picker.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/app.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/datatables/dataTables.bootstrap4.min.css}"/>
+	<!--<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/jquery.dataTables.min.css}" />-->
+
+	<!--Javascripts -->
+    <script th:src="@{/resources/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/resources/js/jquery.spring-friendly.js}"></script>
+    <script th:src="@{/resources/js/jquery-ui.js}"></script>
+	<script th:src="@{/resources/js/fontawesome/js/solid.js}"></script>
+	<script th:src="@{/resources/js/fontawesome/js/fontawesome.js}"></script>
+    <script th:src="@{/resources/js/appointment-picker.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-validation/additional-methods.min.js}"></script>
+    <script th:src="@{/resources/js/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/datatables/dataTables.bootstrap4.min.js}"></script>
+	
+ </head>
+
+<body>
+
+
+<div class="container-fluid">
+
+<div class="row">
+	<!--Begin Navigation Menu-->
+	<div class="col-sm-3" style="background-color:white;">
+		<nav id="sidebar">
+				<div class="sidebar-logo">
+					<a th:href="@{/home}"><img src="images/logo2d.png" style="height:65px" alt="RSA Token"></a>
+				</div>
+				
+                <div>
+                    <hr>
+                </div>
+				
+				<ul class="list-unstyled components">
+					
+					<li>
+						<p><a href="#" ><i class="fas fa-home"></i> Home</a></p>
+					</li>
+					
+					
+					<li>
+						<p><a href="#ta" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user-shield"></i> TA ACTIVITIES</a></p>
+						<ul class="collapse list-unstyled" id="ta">
+							<li>
+								<a th:href="@{/token/distribute/search}">Assign Token</a>
+							</li>
+							<li>
+								<a th:href="@{/ta/profile}">My TA Profile</a>
+							</li>
+						</ul>					
+					</li>
+					
+					<li>
+						<p><a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user"></i> USER ACTIVITIES</a></p>
+						<ul class="collapse list-unstyled" id="userSubmenu">
+							<li>
+								<a th:href="@{/token/lost/search}">Lost Token</a>
+							</li>
+							<li>
+								<a th:href="@{/user/search}">User Search</a>
+							</li>
+						</ul>
+					</li>
+			
+					<li sec:authorize="hasAuthority('PMO')">
+						<p><a href="#pmoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-users"></i> PMO ACTIVITIES</a></p>
+						<ul class="collapse list-unstyled" id="pmoSubmenu">
+							<li>
+								<a th:href="@{/shipment/list/all}">Shipments</a>
+							</li>
+							<li>
+								<a href="#">Sites</a>
+                                <!--<a th:href="@{/sites/list}">Sites</a>-->
+							</li>
+						</ul>
+					</li>
+                  
+                    <p><a href="#"><i class="fas fa-chart-bar"></i> DASHBOARD</a></p>
+                    <p><a href="#"><i class="fas fa-comment-dots"></i> CONTACT US</a></p>
+                </ul>
+
+		</nav>
+	</div><!--End Column-->
+	
+	
+	<div class="col-sm-9" style="background-color:rgb(240, 240, 240);" >
+		<div id="content">
+			<div class="shadow-sm p-3 mb-5 bg-white rounded">WELCOME!!!
+                <a sec:authorize="isAnonymous()" id="log" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+                <a sec:authorize="isAuthenticated()" id="log" th:href="@{/perform_logout}"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+            </div>
+			<!--Main content section-->
+			<section layout:fragment="content"></section>
+		</div>
+        
+	</div><!--End Column 2-->
+</div><!--End Row 1-->
+</div><!--End Wrapper-->
+</body>
+</html>
