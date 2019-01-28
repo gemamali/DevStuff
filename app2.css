@@ -17,7 +17,7 @@ margin-left: -250px;
 #sidebar ul ul li a 
 {
 	padding:10px;
-	margin-left: 30px;
+	margin: 0px 0px 10px 30px;
 	font-size: 9.5pt;
 	display: block;
 }
@@ -63,6 +63,13 @@ a:hover, a:focus
 
 
 /*LOGIN FORM*/
+
+.login-logo
+{
+	display:block;
+	margin: 0 auto 20px auto;
+}
+
 .login-form 
 {
 	width: 340px;
