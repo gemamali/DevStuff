@@ -55,7 +55,7 @@
 	<div class="col-sm-3" style="background-color:white;">
 		<nav id="sidebar">
 				<div class="sidebar-logo">
-					<a th:href="@{/home}"><img src="images/logo2d.png" style="height:65px" alt="RSA Token"></a>
+					<a th:href="@{/home}"><img src="resources/images/logo2d.png" style="height:65px" alt="DIA MFA"></a>
 				</div>
 				
                 <div>
@@ -65,7 +65,7 @@
 				<ul class="list-unstyled components">
 					
 					<li>
-						<p><a href="#" ><i class="fas fa-home"></i> Home</a></p>
+						<p><a th:href="@{/home}" ><i class="fas fa-home"></i> Home</a></p>
 					</li>
 					
 					
@@ -116,7 +116,7 @@
 	
 	<div class="col-sm-9" style="background-color:rgb(240, 240, 240);" >
 		<div id="content">
-			<div class="shadow-sm p-3 mb-5 bg-white rounded">WELCOME!!!
+			<div class="shadow-sm p-3 mb-5 bg-white rounded">
                 <a sec:authorize="isAnonymous()" id="log" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
                 <a sec:authorize="isAuthenticated()" id="log" th:href="@{/perform_logout}"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
             </div>
