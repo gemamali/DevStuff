@@ -1,0 +1,235 @@
+/*MASTER SITE TEMPLATE*/
+
+body 
+{
+	margin: 0;
+	padding: 0;
+}
+
+body:before 
+{
+  content: '';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../images/swirl3.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  opacity:0.2;  
+}
+
+/* FONTS */
+/*@font-face 
+{
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../resources/fonts/PlayfairDisplay.ttf) format('truetype');*/
+}
+
+/*@font-face 
+{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../resources/fonts/Roboto/Roboto-Bold.ttf) format('truetype');
+}*/
+
+p {-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:Muli,Helvetica,Arial,sans-serif;color:#66615b; font-size: 10.5pt; margin: 20px 10px 20px 10px;}
+
+#log{ float: right;}
+
+#sidebar 
+{
+	min-width: 260px;
+	max-width: 250px;
+	min-height: 100vh;
+}
+
+#sidebar.active 
+{
+	margin-left: -250px;
+}
+	
+#sidebar ul ul li a 
+{
+	/*padding:10px;
+    font-family:Muli,Helvetica,Arial,sans-serif;*/
+	margin: 0px 0px 0px 30px;
+    font-family: 'Playfair Display', serif;
+	font-size: 12pt;
+	display: block;
+}
+
+.sidebar-logo{ margin: 25px 0 0 5px; }
+
+i 
+{  
+  font-size: 20px;
+  padding: 20px;
+  color: #7386D5;
+}
+	
+nav{ height:100%;}
+
+hr 
+{
+  margin: 10px 10px 30px 10px;
+  position: relative;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width:270px;
+}
+
+.shadow-sm{ margin-top:20px; }	
+
+#content{background-color:white;}
+
+#content-box {box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);}
+
+div.col-md-9
+{  
+  background-image: url(../images/bg1.png);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+li {margin: 20px 10px 20px 10px;}
+
+a { -moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family: 'Roboto', serif;color:#66615b; font-size: 14pt; opacity: 0.9;}
+
+a:hover, a:focus 
+{
+	color: #3399ff;
+	font-weight:600;
+	text-decoration: none;
+	transition: all 0.3s;
+	cursor:pointer;
+}
+
+/*#sidebar ul li a:hover 
+{
+    color: #7386D5;
+    background: #393939;
+}*/
+
+#menu-icon
+{
+	margin-right:9px;
+}
+
+
+/*LOGIN FORM*/
+
+#form-head
+{
+    /*font-family: 'Roboto', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;*/
+    font-family: 'Playfair Display', serif;
+	font-size: 28pt;	
+	top:10%;
+	left:50%;
+	opacity:0.8;
+	position:absolute;
+	transform: translate(-50%, -50%);
+}
+
+.login-logo
+{
+	display:block;
+	margin: 0 auto 20px auto;
+}
+
+.login-form 
+{
+	width: 340px;	
+	top:40%;
+	left:50%;
+	opacity:0.8;
+	position:absolute;
+	transform: translate(-50%, -50%);
+}
+
+.login-form form 
+{
+	margin-bottom: 15px;
+	background: #f7f7f7;
+	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+
+.login-form h2 
+{
+	margin: 0 0 15px;
+}
+
+.form-control, .btn 
+{
+	min-height: 38px;
+	border-radius: 2px;
+}
+
+.btn 
+{        
+	font-size: 15px;
+	font-weight: bold;
+}
+
+/*TOOL TIP*/
+
+/* Tooltip container */
+.tooltip 
+{
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext 
+{
+  visibility: hidden;
+  width: 120px;
+  background-color: #3399ff;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after 
+{
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
