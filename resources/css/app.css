@@ -195,7 +195,7 @@ a:hover, a:focus
 /* Tooltip text */
 .tooltip .tooltiptext 
 {
-  visibility: hidden;
+  
   width: 120px;
   background-color: #3399ff;
   color: #fff;
