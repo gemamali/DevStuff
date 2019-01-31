@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/no_menu_base">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DIA MFA</title>
+    
+    <!-- Google Font
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">-->
+	 
+	<!--Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/jquery-ui.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/appointment-picker.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/app.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/datatables/dataTables.bootstrap4.min.css}"/>
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/jquery.dataTables.min.css}" />
+
+	<!--Javascripts -->
+    <script th:src="@{/resources/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/resources/js/jquery.spring-friendly.js}"></script>
+    <script th:src="@{/resources/js/jquery-ui.js}"></script>
+	<script th:src="@{/resources/js/fontawesome/js/solid.js}"></script>
+	<script th:src="@{/resources/js/fontawesome/js/fontawesome.js}"></script>
+    <script th:src="@{/resources/js/appointment-picker.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-validation/additional-methods.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/resources/js/popper-1.12.9.min.js}"></script>
+    <script th:src="@{/resources/js/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/datatables/dataTables.bootstrap4.min.js}"></script>
+       
+	
+</head>
+<body>
+
+<div layout:fragment="content" id="page_content">
+	
+	<div id="form-head">Welcome</div>
+    <div class="login-form">
+			<form name="f" th:action="@{/perform_login}" method="post" id="form">
+				<img src="resources/images/logo2da1.png" style="width:220px" alt="DIA MFA" class="login-logo">      
+				<div class="form-group">
+					<input type="text" id="inputUsername" class="form-control" placeholder="COE ID" name="username" required autofocus>
+				</div>
+				<div class="form-group">
+					<input type="password" id="inputPassword" class="form-control" placeholder="PIN + Tokencode" name="password" data-toggle="tooltip" title="Enter your PIN and the Tokencode located your RSA Token" data-placement="right" required>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-block">Log in</button>
+				</div>
+				<div class="clearfix text-center">
+					<a href="#">Forgot PIN?</a>
+				</div>        
+			</form>
+			<!--<p class="text-center"><a href="#">Create an Account</a></p>-->
+     </div><!--End Form-->
+    
+    <script type="application/javascript">
+        $("#form").validate();
+    </script>
+	
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="tooltip"]').tooltip({delay: {show: 2000, hide: 300}});   
+		});
+        
+	</script>
+</div>
+
+</body>
+
+</html>
