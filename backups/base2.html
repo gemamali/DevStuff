@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+    <meta charset="UTF-8">
+    <title>DIA MFA</title>
+    
+	<!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	   
+	<!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>   
+	
+	<!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+	
+	<!--Google Font-->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+    
+ </head>
+
+<style type="text/css">
+	p {-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:Muli,Helvetica,Arial,sans-serif;color:#66615b; font-size: 10.5pt; margin: 20px 10px 20px 10px;}
+
+    #log
+    {
+        float: right;
+    }
+    
+	#sidebar 
+	{
+		min-width: 260px;
+		max-width: 250px;
+		min-height: 100vh;
+	}
+	
+	#sidebar.active {
+    margin-left: -250px;
+}
+		
+	#sidebar ul ul li a 
+	{
+		padding:10px;
+		margin-left: 30px;
+		font-size: 9.5pt;
+		display: block;
+	}
+	
+		
+	.sidebar-logo{margin: 25px 0 0 5px; }
+	
+	i 
+	{  
+	  font-size: 20px;
+	  padding: 20px;
+	  color: #7386D5;
+	}
+	    
+	nav{height:100%;}
+	
+	hr 
+	{
+	  margin: 10px 10px 30px 10px;
+	  position: relative;
+	  border: 0;
+	  border-top: 1px solid rgba(0, 0, 0, 0.1);
+	  width:270px;
+	}
+	
+	.shadow-sm{margin-top:20px;}	
+	
+	#content{background-color:white;}
+	
+	a {color:#66615b;}
+	
+	a:hover, a:focus 
+    {
+		color: #3399ff;
+		font-weight:600;
+		text-decoration: none;
+		transition: all 0.3s;
+    }
+    
+    .login-form {
+		width: 340px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .fas
+    {
+        /*place style for boxing and padding menu icons*/
+    }
+</style>
+
+<body>
+
+
+<div class="container-fluid">
+
+<div class="row">
+	<!--Begin Navigation Menu-->
+	<div class="col-sm-3" style="background-color:white;">
+		<nav id="sidebar">
+				<div class="sidebar-logo">
+					<a th:href="@{/home}"><img src="images/logo2d.png" style="height:65px" alt="RSA Token"></a>
+				</div>
+				
+                <div>
+                    <hr>
+                </div>
+				
+				<ul class="list-unstyled components">
+					
+					<li>
+						<p><a href="#" ><i class="fas fa-home"></i> Home</a></p>
+					</li>
+					
+					
+					<li>
+						<p><a href="#ta" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user-shield"></i> TA ACTIVITIES</a></p>
+						<ul class="collapse list-unstyled" id="ta">
+							<li>
+								<a th:href="@{/token/distribute/search}">Assign Token</a>
+							</li>
+							<li>
+								<a th:href="@{/ta/profile}">My TA Profile</a>
+							</li>
+						</ul>					
+					</li>
+					
+					<li>
+						<p><a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user"></i> USER ACTIVITIES</a></p>
+						<ul class="collapse list-unstyled" id="userSubmenu">
+							<li>
+								<a th:href="@{/token/lost/search}">Lost Token</a>
+							</li>
+							<li>
+								<a th:href="@{/user/search}">User Search</a>
+							</li>
+						</ul>
+					</li>
+			
+					<li sec:authorize="hasAuthority('PMO')">
+						<p><a href="#pmoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-users"></i> PMO ACTIVITIES</a></p>
+						<ul class="collapse list-unstyled" id="pmoSubmenu">
+							<li>
+								<a th:href="@{/shipment/list/all}">Shipments</a>
+							</li>
+							<li>
+								<a href="#">Sites</a>
+                                <!--<a th:href="@{/sites/list}">Sites</a>-->
+							</li>
+						</ul>
+					</li>
+                  
+                    <p><a href="#"><i class="fas fa-chart-bar"></i> DASHBOARD</a></p>
+                    <p><a href="#"><i class="fas fa-comment-dots"></i> CONTACT US</a></p>
+                </ul>
+
+		</nav>
+	</div><!--End Column-->
+	
+	
+	<div class="col-sm-9" style="background-color:rgb(240, 240, 240);" >
+		<div id="content">
+			<div class="shadow-sm p-3 mb-5 bg-white rounded">WELCOME!!!
+                <a href="#" id="log"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+                <a href="#" id="log"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+            </div>
+		</div>
+        
+	</div><!--End Column 2-->
+</div><!--End Row 1-->
+</div><!--End Wrapper-->
+</body>
+</html>
