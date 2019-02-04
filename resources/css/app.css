@@ -62,6 +62,7 @@ p {-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-fam
     font-family:Muli,Helvetica,Arial,sans-serif;*/
 	margin: 0px 0px 0px 30px;
     font-family: 'Playfair Display', serif;
+    text-decoration:none;
 	font-size: 12pt;
 	display: block;
 }
@@ -90,7 +91,7 @@ hr
 
 #content{background-color:white;}
 
-#content-box {box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);}
+/*#content-box {box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);}*/
 
 div.col-md-9
 {  
@@ -232,4 +233,11 @@ a:hover, a:focus
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+/*CONTENT CONTAINER*/
+
+.content_container
+{
+	margin: 5px 15px 15px 15px;
 }
