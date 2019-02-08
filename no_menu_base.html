@@ -9,23 +9,16 @@
     <title>DIA MFA</title>
     <link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon-32x32.png">
     
-    
-    <!-- Google Font
-    <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">-->
-	 
-	<!--Stylesheets -->
+    <!--Stylesheets -->
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/jquery-ui.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/appointment-picker.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/app.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/datatables/dataTables.bootstrap4.min.css}"/>
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/jquery.dataTables.min.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/app.css}"/>
 
 	<!--Javascripts -->
-    <script th:src="@{/resources/js/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/resources/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/resources/js/jquery.spring-friendly.js}"></script>
     <script th:src="@{/resources/js/jquery-ui.js}"></script>
@@ -34,7 +27,6 @@
     <script th:src="@{/resources/js/appointment-picker.min.js}"></script>
     <script th:src="@{/resources/js/jquery-validation/jquery.validate.min.js}"></script>
     <script th:src="@{/resources/js/jquery-validation/additional-methods.min.js}"></script>
-    <script th:src="@{/resources/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/resources/js/popper-1.12.9.min.js}"></script>
     <script th:src="@{/resources/js/bootstrap/bootstrap.min.js}"></script>
     <script th:src="@{/resources/js/datatables/dataTables.bootstrap4.min.js}"></script>
@@ -43,19 +35,8 @@
 
 <body>
 
-
-<div class="container-fluid">	
+		<!--Main content section-->
+		<section layout:fragment="content"></section>
 	
-	<div class="col-md-12" style="background-color:rgb(240, 240, 240);" >
-		<div id="content">
-			<!--<div class="shadow-sm p-3 mb-5 bg-white rounded">
-                <a sec:authorize="isAnonymous()" id="log" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
-                <a sec:authorize="isAuthenticated()" id="log" th:href="@{/perform_logout}"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
-            </div>-->
-			<!--Main content section-->
-			<section layout:fragment="content"></section>
-		</div>
-	</div>
-</div><!--End Wrapper-->
 </body>
 </html>
