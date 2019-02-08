@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>DIA MFA</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+<div class="content_container">
+    <h3>Active Shipments</h3>
+
+    <div>
+        <a th:href="@{/shipment/request}">Start new Shipment</a>
+    </div>
+
+    <table>
+        <tr>
+            <td> <a href="#" id="filterActive" style="font-weight: bold;">Active</a></td>
+            <td> <a href="#" id="filterAll">All</a></td>
+        </tr>
+    </table>
+
+
+    <table id="list" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Shipping ID</th>
+            <th>To Site</th>
+            <th>Tokens Requested</th>
+            <th>Status</th>
+            <th>Submitted On</th>
+            <th>Sent On</th>
+            <th>Received On</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tfoot>
+            <tr>
+                <th>Shipping ID</th>
+                <th>To Site</th>
+                <th>Tokens Requested</th>
+                <th>Status</th>
+                <th>Submitted On</th>
+                <th>Sent On</th>
+                <th>Received On</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script type="application/javascript">
+
+        $(document).ready(function() {
+
+            $('table#list tfoot th').each( function() {
+               var title = $(this).text();
+               $(this).html('<input type="text" placeholder="Search '+title+'" />');
+            });
+
+            var table = $('table#list').DataTable({
+                'ajax' : '/data/shipments/active',
+                'serverSide' : true,
+                columns : [{
+                    data : 'guid'
+                }, {
+                    data : 'toSite.name',
+                    render: function (data, type, row) {
+                        return data || '';
+                    }
+                },{
+                    data : 'tokensRequested'
+                }, {
+                    data : 'shipmentStatus'
+                }, {
+                    data : 'submittedTime'
+                }, {
+                    data : 'sentTime',
+                    render: function (data, type, row) {
+                        return data || '';
+                    }
+                }, {
+                    data : 'receivedTime',
+                    render: function (data, type, row) {
+                        return data || '';
+                    }
+                }, {
+                    data: 'guid',
+                    render: function (data, type, row){
+                        return "<a href='/shipment/details/" + data + "'>Details</a>";
+                    }
+                }]
+            });
+
+            table.columns().every( function () {
+                var that = this;
+                $('input', this.footer()).on( 'keyup change', function (){
+                    if( that.search() !== this.value) {
+                        that.search(this.value)
+                            .draw();
+                    }
+                })
+            })
+
+        });
+
+        $("#filterActive").click(function(){
+            $(this).css('font-weight', 'bold');
+            $("#filterAll").css('font-weight', 'normal');
+            $('table#list').DataTable().ajax.url('/data/shipments/active').load();
+        });
+        $("#filterAll").click(function(){
+            $(this).css('font-weight', 'bold');
+            $("#filterActive").css('font-weight', 'normal');
+            $('table#list').DataTable().ajax.url('/data/shipments').load();
+        });
+
+    </script>
+</div>
+</section>
+
+</body>
+</html>

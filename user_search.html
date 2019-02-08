@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>DIA MFA</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+<div class="content_container">
+    <h3>User Search</h3>
+
+    <div th:if="${message != null}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <form method="post" th:action="@{/user/search}">
+        <label for="search">Search for User:</label> <input type="text" id="search" name="search"/>
+        <input type="submit" value="Search" class="btn btn-primary"/>
+    </form>
+
+    <div th:if="${results != null and results.size() == 0}">
+        <span>No users found</span>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(results)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>RSA ID</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr th:each="user : ${results}">
+                <td th:text="${user.userID}"></td>
+                <td><span th:text="${user.firstName}"></span> <span th:text="${user.middleName}"></span> <span th:text="${user.lastName}"></span></td>
+                <td><a th:href="@{'/user/search/details/'+${user.userID}}">Select</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</section>
+
+</body>
+</html>

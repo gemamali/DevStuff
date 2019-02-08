@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+    <h3>Lost Token</h3>
+
+    <div th:if="${message != null}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div th:if="${message == null}">
+        <table class="table">
+            <tr>
+                <td>COE ID</td>
+                <td th:text="${user.userID}"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <span th:text="${user.firstName}"></span> <span th:text="${user.middleName}"></span> <span th:text="${user.lastName}"></span>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Token Serial Number</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="token : ${tokens}">
+                    <td th:text="${token.serialNumber}"></td>
+                    <td>
+                        <form method="post" th:action="@{/token/lost/complete}" id="form">
+
+                            <input type="hidden" name="tokenSerial" th:value="${token.serialNumber}" />
+                            <input type="hidden" name="rsaId" th:value="${user.userID}" />
+                            <input type="submit" value="Mark Lost"/>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script type="application/javascript">
+        $(function (){
+            $('#form').submit(function(){
+                return confirm("Click OK to continue?");
+            });
+
+        });
+    </script>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<div layout:fragment="content" id="page_content">
+    <h3>User Details</h3>
+
+
+    <table class="table">
+        <tr>
+            <td>COE ID</td>
+            <td th:text="${user.userID}"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><span th:text="${user.firstName}"></span> <span th:text="${user.middleName}"></span> <span th:text="${user.lastName}"></span></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td th:text="${user.email}"></td>
+        </tr>
+        <tr>
+            <td>Last Login</td>
+            <td th:text="${user.lastLogin}"></td>
+        </tr>
+        <tr>
+            <td>Enabled</td>
+            <td th:text="${user.enabled}"></td>
+        </tr>
+
+    </table>
+
+
+    <div th:if="${tokens != null}">
+        <h3>Token Details</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Serial Number</th>
+                    <th>Expiration Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="token : ${tokens}">
+                    <td th:text="${token.serialNumber}"></td>
+                    <td th:text="${token.expirationDate}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

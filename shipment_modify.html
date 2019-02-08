@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<div layout:fragment="content" id="page_content">
+    <h3>Shipment Modify</h3>
+
+    <div th:if="${shipment.beingWorked == false}">
+        <form method="post" th:action="@{/shipment/modify}" th:object="${form}">
+            <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+                <li class="error" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+            </ul>
+
+            <input type="hidden" th:field="*{shipmentGuid}" />
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="tokensRequested">Tokens Requested</label>
+                    </td>
+                    <td>
+                        <input type="text" id="tokensRequested" th:field="*{tokensRequested}" />
+                    </td>
+                </tr>
+            </table>
+
+            <input type="submit" value="Update Tokens" class="btn btn-primary"/>
+        </form>
+    </div>
+
+    <div th:if="${shipment.beingWorked == true}">
+        Tokens being sent: <span th:text="${shipment.tokensSent()}"></span>
+    </div>
+
+    <div th:if="${shipment.sentTime == null}">
+        <form th:action="@{/shipment/updateStatus}" method="post">
+            <input type="hidden" name="shipmentGuid" th:value="${form.shipmentGuid}" />
+            <label for="beingWorked">Working Shipment</label>
+            <input type="checkbox" name="beingWorked" id="beingWorked" th:checked="${shipment.beingWorked}"/>
+            <br/>
+            <input type="submit" value="Update" class="btn btn-primary"/>
+        </form>
+    </div>
+
+    <div th:if="${shipment.sentTime != null}">
+        <a th:href="@{'/shipment/receive/'+${form.shipmentGuid}}">Receive Shipment</a>
+    </div>
+
+    <div th:if="${shipment.sentTime == null && shipment.beingWorked == true}">
+        <a th:href="@{'/shipment/send/'+${form.shipmentGuid}}">Send Shipment</a>
+    </div>
+
+    <div th:if="${shipment.sentTime == null}">
+        <form th:action="@{/shipment/cancel}" method="post">
+            <input type="hidden" name="shipmentGuid" th:value="${form.shipmentGuid}" />
+            <input type="submit" value="Cancel Shipment" class="btn btn-warning"/>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

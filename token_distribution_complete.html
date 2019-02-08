@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+    <h3>Assign Token</h3>
+
+    <div th:if="${message != null}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div th:if="${hasValid != null}">
+        <span>User already is assigned a token</span>
+        <br/>
+        <span><a th:href="@{/token/distribute/search}">Back to Search</a> </span>
+    </div>
+    <div th:if="${hasValid == null}">
+        <form method="post" th:action="@{/token/distribute/complete}" th:object="${form}" id="form">
+            <input type="hidden" name="rsaId" th:value="${form.rsaId}"/>
+
+            <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+                <li class="error" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+            </ul>
+
+            <table class="table">
+                <tr>
+                    <td>COE ID</td>
+                    <td th:text="${form.rsaId}"></td>
+                </tr>
+                <tr>
+                    <td><label for="tokenSerial">Token Serial</label></td>
+                    <td><input type="text" name="tokenSerial" id="tokenSerial" /> </td>
+                </tr>
+            </table>
+
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </form>
+    </div>
+
+    <script type="application/javascript">
+        $("#form").validate();
+    </script>
+
+</section>
+
+</body>
+</html>

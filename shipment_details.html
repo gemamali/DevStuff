@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>DIA MFA</title>
+</head>
+<body>
+
+<div layout:fragment="content" id="page_content">
+    <h3>Shipment Details</h3>
+
+    <div th:if="${shipment.cancelled}">
+        This Shipment was Cancelled
+    </div>
+
+    <div th:if="${shipment.cancelled == false and shipment.receivedTime == null}">
+        <a th:href="@{'/shipment/modify/'+${shipment.guid}}">Update Shipment</a>
+    </div>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Shipping ID</td>
+            <td th:text="${shipment.guid}"></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td th:text="${shipment.shipmentStatus}"></td>
+        </tr>
+        <tr th:if="${shipment.beingWorked}">
+            <td>Being worked by</td>
+            <td th:text="${shipment.fulfilledBy.rsaId}"></td>
+        </tr>
+        <tr>
+            <td>Tokens Requested</td>
+            <td th:text="${shipment.tokensRequested}"></td>
+        </tr>
+        <tr th:if="${shipment.sentTime != null}">
+            <td>Tokens Shipped</td>
+            <td th:text="${shipment.tokensSent()}"></td>
+        </tr>
+        <tr th:if="${shipment.tokensReceived != null}">
+            <td>Tokens Received</td>
+            <td th:text="${shipment.tokensReceived}"></td>
+        </tr>
+        <tr>
+            <td>Ship to Site</td>
+            <td th:text="${shipment.getToSite().shippingId}"></td>
+        </tr>
+        <tr>
+            <td>Submitted On</td>
+            <td th:text="${shipment.submittedTime}"></td>
+        </tr>
+        <tr th:if="${shipment.sentTime != null}">
+            <td>Sent On</td>
+            <td th:text="${shipment.sentTime}"></td>
+        </tr>
+        <th:block th:if="${shipment.receivedTime != null}">
+            <tr>
+                <td>Received On</td>
+                <td th:text="${shipment.receivedTime}"></td>
+            </tr>
+            <tr>
+                <td>Received By</td>
+                <td th:text="${shipment.receivedBy.rsaId}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

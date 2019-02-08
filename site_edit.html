@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<div layout:fragment="content" id="page_content">
+    <h3>Site Edit</h3>
+
+    <div th:if="${form != null}">
+        <form method="post" th:action="@{/sites/edit}" th:object="${form}" id="form">
+            <input type="hidden" name="shippingId" th:value="${form.shippingId}" />
+
+            <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+                <li class="error" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+            </ul>
+
+            <table>
+                <tr>
+                    <td><label for="active">Active?</label></td>
+                    <td> <input type="checkbox" id="active" th:field="*{active}" /></td>
+                </tr>
+                <tr>
+                    <td><label>Shipping ID</label></td>
+                    <td th:text="${form.shippingId}"></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Site Name</label></td>
+                    <td><input type="text" id="name" th:field="*{name}" /></td>
+                </tr>
+                <tr>
+                    <td><label for="physicalAddress">Physical Address</label></td>
+                    <td><input type="text" id="physicalAddress" th:field="*{physicalAddress}"/> </td>
+                </tr>
+                <tr>
+                    <td><label for="countryId">Country</label></td>
+                    <td>
+                        <select th:field="*{countryId}" id="countryId">
+                            <option value="">--Select--</option>
+                            <option th:each="country : ${countryList}" th:text="${country.name}" th:value="${country.digraph}"></option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </form>
+    </div>
+
+    <script type="application/javascript">
+        $("#form").validate();
+    </script>
+
+</div>
+
+</body>
+</html>

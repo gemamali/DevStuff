@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+    <h3>Appointment Details</h3>
+
+    <div sec:authorize="hasAuthority('TRUSTED_AGENT')">
+        <h4>TA Options</h4>
+
+        <table th:if="${appointment.cancelled == false && appointment.confirmed == false}">
+            <tr>
+                <td>
+                    <form th:action="@{/appointment/confirm}" method="post">
+                        <input type="hidden" name="appointmentId" th:value="${appointment.appointmentId}" />
+                        <input type="hidden" name="confirmed" value="true" />
+                        <input type="submit" value="Confirm" class="btn btn-primary"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/appointment/cancel}" method="post">
+                        <input type="hidden" name="appointmentId" th:value="${appointment.appointmentId}" />
+                        <input type="hidden" name="cancel" value="true" />
+                        <input type="submit" value="Cancel" class="btn btn-warning"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <div>
+            <form th:action="@{/appointment/updateNotes}" method="post">
+                <input type="hidden" name="appointmentId" th:value="${appointment.appointmentId}" />
+                <label> Notes
+                    <textarea name="notes" th:text="${appointment.notes}"></textarea>
+                </label>
+                <br/>
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <td>Current Status</td>
+            <td>
+                <span th:if="${appointment.cancelled == true}">Cancelled</span>
+                <span th:if="${appointment.confirmed == true}">Confirmed</span>
+                <span th:if="${appointment.confirmed == false and appointment.cancelled == false}">PENDING</span>
+            </td>
+        </tr>
+        <tr th:if="${appointment.notes != null}">
+            <td>Notes</td>
+            <td th:text="${appointment.notes}"></td>
+        </tr>
+        <tr>
+            <td>Appointment ID</td>
+            <td th:text="${appointment.appointmentId}"></td>
+        </tr>
+        <tr>
+            <td>Requester ID</td>
+            <td th:text="${appointment.requesterRsaId}"></td>
+        </tr>
+        <tr>
+            <td>Requested Date</td>
+            <td th:text="${appointment.requestedDate}"></td>
+        </tr>
+        <tr>
+            <td>Requested Time</td>
+            <td th:text="${appointment.requestedTime}"></td>
+        </tr>
+        <tr>
+            <td>Requested TA</td>
+            <td th:text="${appointment.withTA.rsaId}"></td>
+        </tr>
+
+        <tr>
+            <td>Requested Location</td>
+            <td th:text="${appointment.withTA.site.physicalAddress}"></td>
+        </tr>
+        <tr>
+            <td>Desk Location</td>
+            <td th:text="${appointment.withTA.desk}"></td>
+        </tr>
+
+    </table>
+</section>
+
+</body>
+</html>

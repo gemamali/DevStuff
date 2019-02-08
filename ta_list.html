@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+    <h2>Trusted Agent List</h2>
+
+    <div sec:authorize="hasAuthority('TRUSTED_AGENT')">
+        <a th:href="@{/ta/register/start}">Register a new TA</a>
+    </div>
+
+
+    <table id="list" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>RSA ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Site Name</th>
+                <th>Available Hours</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            var table = $('table#list').DataTable({
+                'ajax' : '/data/tas',
+                'serverSide' : true,
+                columns : [{
+                    data : 'rsaId'
+                }, {
+                    data : 'firstName'
+                }, {
+                    data : 'lastName'
+                }, {
+                    data : 'email'
+                }, {
+                    data : 'site.name',
+                    render: function (data, type, row) {
+                        return data || '';
+                    }
+                }, {
+                    data : 'workingHours'
+                }, {
+                    data: 'rsaId',
+                    render: function (data, type, row){
+                        return "<a href='/ta/details/" + data + "'>Details</a>";
+                    }
+                }, {
+                    data: 'rsaId',
+                    render: function (data, type, row){
+                        return "<a href='/appointment/schedule/" + data + "'>Schedule Appointment</a>";
+                    }
+                }]
+            });
+        });
+    </script>
+    
+</section>
+
+</body>
+</html>

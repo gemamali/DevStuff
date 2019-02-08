@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>DIA MFA</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+<div class="content_container">
+    <h3>My Profile</h3>
+
+    <div th:if="${form != null}">
+        <form method="post" th:action="@{/ta/profile}" th:object="${form}">
+            <input type="hidden" name="rsaId" th:value="${form.rsaId}" />
+            <input type="hidden" name="email" th:value="${form.email}" />
+
+            <div class="form-group">
+                <label>COE ID</label>
+                <span th:text="${form.rsaId}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="desk">Desk Location</label>
+                <input type="text" id="desk" th:field="*{desk}" placeholder="Cubicle 123" class="form-control"/>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fromTime">Available From</label>
+                    <input id="fromTime" type="text" th:field="*{fromTime}" class="form-control"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="toTime">Available To</label>
+                    <input id="toTime" type="text" th:field="*{toTime}" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="site">Your Site</label>
+                <select th:field="*{shippingId}" id="site" class="form-control">
+                    <option value="">---Select---</option>
+                    <option th:each="site : ${sites}" th:value="${site.shippingId}" th:text="${site.name}"></option>
+                </select>
+            </div>
+
+            <input type="submit" value="Save" class="btn btn-primary"/>
+        </form>
+    </div>
+
+
+
+    <div th:if="${not #lists.isEmpty(appointments)}">
+        <h4>Upcoming Appointments</h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Confirmed</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="appt : ${appointments}">
+                    <td th:text="${appt.requesterRsaId}"></td>
+                    <td th:text="${appt.requestedDate}"></td>
+                    <td th:text="${appt.requestedTime}"></td>
+                    <td th:text="${appt.confirmed}"></td>
+                    <td><a th:href="@{'/appointment/details/'+${appt.appointmentId}}">Details</a> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+           buildTimePicker("fromTime");
+           buildTimePicker("toTime");
+        });
+
+        function buildTimePicker(elementId){
+            new AppointmentPicker(document.getElementById(elementId), {
+                interval: 30,
+                startTime: 6,
+                endTime: 20
+            });
+        }
+    </script>
+</div>
+</section>
+
+</body>
+</html>

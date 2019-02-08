@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<div layout:fragment="content" id="page_content">
+    <h3>Site Add</h3>
+
+    <div th:if="${form != null}">
+        <form method="post" th:action="@{/sites/add}" th:object="${form}" id="form">
+
+            <table>
+                <tr>
+                    <td><label for="shippingId">Shipping ID*</label></td>
+                    <td>
+                        <input type="text" id="shippingId" th:field="*{shippingId}" class="form-control" required/>
+                        <p th:if="${#fields.hasErrors('shippingId')}" th:errors="*{shippingId}">Error</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="name">Site Name*</label></td>
+                    <td>
+                        <input type="text" id="name" th:field="*{name}" class="form-control" required />
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="physicalAddress">Physical Address*</label></td>
+                    <td>
+                        <input type="text" id="physicalAddress" th:field="*{physicalAddress}" class="form-control" required/>
+                        <p th:if="${#fields.hasErrors('physicalAddress')}" th:errors="*{physicalAddress}">Error</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="countryId">Country*</label></td>
+                    <td>
+                        <select th:field="*{countryId}" id="countryId" class="form-control" required>
+                            <option value="">--Select--</option>
+                            <option th:each="country : ${countryList}" th:text="${country.name}" th:value="${country.digraph}"></option>
+                        </select>
+
+                        <p th:if="${#fields.hasErrors('countryId')}" th:errors="*{countryId}">Error</p>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </form>
+    </div>
+
+    <script type="application/javascript">
+        $("#form").validate();
+    </script>
+</div>
+
+</body>
+</html>

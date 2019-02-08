@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+    <h3>Trusted Agent Update</h3>
+
+    <div th:if="${form != null}">
+        <form method="post" th:action="@{/ta/modify}" th:object="${form}">
+
+            <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+                <li class="error" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+            </ul>
+
+            <input type="hidden" name="rsaId" th:value="${form.rsaId}" />
+            <table class="table">
+                <tr>
+                    <td><label>COE ID</label></td>
+                    <td th:text="${form.rsaId}"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="text" th:field="*{email}" id="email" /></td>
+                </tr>
+                <tr>
+                    <td><label for="site">Site</label></td>
+                    <td>
+                        <select th:field="*{shippingId}" id="site">
+                            <option value="">---Select---</option>
+                            <option th:each="site : ${sites}" th:value="${site.shippingId}" th:text="${site.name}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="pmo">In PMO?</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" th:field="*{pmo}" id="pmo" th:checked="${form.pmo}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="active">Active?</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" th:field="*{active}" id="active" th:checked="${form.active}"/>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </form>
+    </div>
+
+</section>
+
+</body>
+</html>

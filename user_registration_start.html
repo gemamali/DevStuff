@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+</head>
+<body>
+
+<section layout:fragment="content" id="page_content">
+    <h3>Registration Start</h3>
+
+    <form method="post" th:action="@{/user/registration/start}" th:object="${form}">
+
+        <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+            <li class="error" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+        </ul>
+
+        <div id="tokenAgreement">
+            <h4>User Agreement</h4>
+            <div>
+                <span th:text="#{user.registration.userAgreement}"></span>
+            </div>
+            <label for="acceptTerms">I have read and agree to the terms <input id="acceptTerms" type="checkbox" th:field="*{acceptTerms}" /></label>
+        </div>
+
+        <table class="table">
+            <tr>
+                <td><label for="rsaId">COE ID</label></td>
+                <td><input type="text" name="rsaId" id="rsaId" /> </td>
+            </tr>
+            <tr>
+                <td><label for="currentTokenCode">Next Token Code</label></td>
+                <td><input type="password" name="currentTokenCode" id="currentTokenCode" /> </td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+    </form>
+
+</section>
+
+</body>
+</html>
