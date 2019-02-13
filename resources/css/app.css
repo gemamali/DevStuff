@@ -38,13 +38,13 @@ body:before
 
 #sidebar 
 {
-	/*min-width: 260px;
-	max-width: 250px;
-	min-height: 100vh;*/
-	
-	overflow: auto;
+    /*min-width: 260px;
+    max-width: 250px;
+    min-height: 100vh;*/
+    overflow: auto;
     max-height: 100vh;
     height: 100vh;
+    box-shadow: inset -1px 0 0 0 #ddd;
     
 }
 
