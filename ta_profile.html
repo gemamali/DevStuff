@@ -10,7 +10,7 @@
 
 <section layout:fragment="content" id="page_content">
 <div class="content_container">
-    <h3>My Profile</h3>
+    <div class="content-header">My Profile</div>
 
     <div th:if="${form != null}">
         <form method="post" th:action="@{/ta/profile}" th:object="${form}">
