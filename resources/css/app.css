@@ -88,7 +88,11 @@ hr
 
 /*MAIN CONTENT FOR EACH PAGE*/
 
-#content{background-color:white;}
+#content
+{
+  background-color:white;
+  overflow:auto;
+}
 
 #content-banner
 {
